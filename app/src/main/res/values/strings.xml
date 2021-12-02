@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">SecondHandApplication</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="register_account">Don\'t have Account?</string>
+    <string name="register">Register</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password">Password</string>
+    <string name="products">products</string>
+    <string name="title_activity_main2" translatable="false">MainActivity2</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="add_product">Add Product</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="birthday" translatable="false">Birthday</string>
+    <string name="phone">Phone</string>
+    <string name="street">Street</string>
+    <string name="street_number">Street number</string>
+    <string name="logout" translatable="false">logout</string>
+    <string name="price">price</string>
+    <string name="address">Address</string>
+    <string name="product_created">Product created</string>
+    <string name="price_empty">Price cannot be empty</string>
+    <string name="description_empty">Description cannot be empty</string>
+    <string name="title_empty">Title cannot be empty</string>
+    <string name="registration_error">Registration error</string>
+    <string name="success_registration">User registered successfully</string>
+    <string name="error_phone">Phone cannot be empty</string>
+    <string name="lastname_error">Lastname cannot be empty</string>
+    <string name="password_larger_error">Password must be larger than 6 characters</string>
+    <string name="password_registration_error">Password cannot be empty</string>
+    <string name="user_logged_success">User Logged in successfully</string>
+    <string name="email_password_error">email or password not correct</string>
+    <string name="email_error">Email cannot be empty</string>
+    <string name="error_firstname">Firstname cannot be empty</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="logout_menu">Logout</string>
+    <string name="search">search</string>
+    <string name="choose_profile_image">Choose profile image</string>
+    <string name="error_street_name">Street cannot be empty</string>
+    <string name="error_street_number">Number cannot be empty</string>
+    <string name="change_image">Change image</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_password_or_mail">Change password or mail</string>
+    <string name="update_profile">Update profile</string>
+    <string name="retype_password">Retype password</string>
+    <string name="old_password">Old password</string>
+    <string name="old_password_empty_error">Old password cannot be empty for update your credentials</string>
+    <string name="email_update">Email updated</string>
+    <string name="compare_password_error">New password is not matching with retype password</string>
+    <string name="update_email_password">Email and password updated</string>
+</resources>

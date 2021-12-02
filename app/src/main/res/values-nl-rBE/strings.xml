@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tweedehands Applicatie</string>
+    <string name="home">Home</string>
+    <string name="profile">Profiel</string>
+    <string name="register_account">Geen Account?</string>
+    <string name="register">Registreer</string>
+    <string name="password">Wachtwoord</string>
+    <string name="products">Producten</string>
+    <string name="next">Volgende</string>
+    <string name="previous">Vorige</string>
+    <string name="title">Titel</string>
+    <string name="description">Beschrijving</string>
+    <string name="add_product">Voeg product</string>
+    <string name="first_name">Voornaam</string>
+    <string name="last_name">Naam</string>
+    <string name="phone">Telefoon</string>
+    <string name="street">Straat</string>
+    <string name="street_number">Straatnummer</string>
+    <string name="price">Prijs</string>
+    <string name="address">Adres</string>
+    <string name="product_created">Product aangemaakt</string>
+    <string name="price_empty">Prijs kan niet leeg zijn</string>
+    <string name="description_empty">Beschrijving kan niet leeg zijn</string>
+    <string name="title_empty">Titel kan niet leeg zijn</string>
+    <string name="registration_error">Fout bij het registreren</string>
+    <string name="success_registration">Account is aangemaakt</string>
+    <string name="error_phone">Telefoon kan niet leeg zijn</string>
+    <string name="lastname_error">Naam kan niet leeg zijn</string>
+    <string name="password_larger_error">Wachtwoord moet langer zijn dan  6 characters</string>
+    <string name="password_registration_error">Wachtwoord kan niet leeg zijn</string>
+    <string name="user_logged_success">Account aangemeld</string>
+    <string name="email_password_error">Foutieve email of wachtwoord</string>
+    <string name="email_error">Email kan niet leeg zijn</string>
+    <string name="error_firstname">Voornaam kan niet leeg zijn</string>
+</resources>
