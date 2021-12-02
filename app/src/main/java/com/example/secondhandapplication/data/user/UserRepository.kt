@@ -3,6 +3,7 @@ package com.example.secondhandapp.data.user
 import android.graphics.Bitmap
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import com.example.secondhandapplication.data.relations.UserWithProducts
 
 
 class UserRepository(private val userDAO: UserDAO) {
@@ -41,4 +42,8 @@ class UserRepository(private val userDAO: UserDAO) {
         userDAO.deleteUserByEmail(email)
     }
 
+
+    fun getUserWithProducts(email: String): LiveData<List<UserWithProducts>> {
+        return userDAO.getUserWithProducts(email)
+    }
 }

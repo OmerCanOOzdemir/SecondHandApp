@@ -3,6 +3,7 @@ package com.example.secondhandapp.data.user
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.secondhandapplication.data.relations.UserWithProducts
 
 @Dao
 interface UserDAO {
@@ -25,5 +26,9 @@ interface UserDAO {
 
     @Query("Delete from user where email = :email")
     suspend fun deleteUserByEmail(email:String)
+
+    @Transaction
+    @Query("SELECT * FROM User where email = :email")
+    fun getUserWithProducts(email:String): LiveData<List<UserWithProducts>>
 
 }

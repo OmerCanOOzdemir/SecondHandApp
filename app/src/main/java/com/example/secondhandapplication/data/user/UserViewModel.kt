@@ -6,6 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.secondhandapp.data.database.SecondHandDatabase
+import com.example.secondhandapplication.data.product.Product
+import com.example.secondhandapplication.data.relations.UserWithProducts
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application):AndroidViewModel(application) {
@@ -43,5 +45,8 @@ class UserViewModel(application: Application):AndroidViewModel(application) {
         viewModelScope.launch {
             repository.deleteEmailByUser(email)
         }
+    }
+    fun getUserWithProducts(email: String): LiveData<List<UserWithProducts>> {
+        return repository.getUserWithProducts(email)
     }
 }

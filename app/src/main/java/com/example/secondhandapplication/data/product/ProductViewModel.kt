@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.secondhandapp.data.database.SecondHandDatabase
 import com.example.secondhandapp.data.user.User
 import com.example.secondhandapp.data.user.UserRepository
+import com.example.secondhandapplication.data.relations.UserWithProducts
 import kotlinx.coroutines.launch
 
 class ProductViewModel(application: Application): AndroidViewModel(application) {
@@ -25,4 +26,5 @@ class ProductViewModel(application: Application): AndroidViewModel(application) 
     fun getProductByTitle(title:String): LiveData<List<Product>> {
         return repository.getProductByTitle(title)
     }
+
 }

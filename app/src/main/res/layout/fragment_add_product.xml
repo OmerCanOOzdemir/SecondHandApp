@@ -66,7 +66,14 @@
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
-
+        <Button
+            android:id="@+id/upload_product_image_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_image"
+            android:layout_marginTop="15dp"
+            android:padding="12dp"
+            />
         <Button
             android:id="@+id/add_product_btn"
             android:layout_width="match_parent"

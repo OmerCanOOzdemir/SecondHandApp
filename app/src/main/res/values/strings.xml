@@ -65,4 +65,9 @@
     <string name="user_updated">User Updated</string>
     <string name="edit_product">Edit product</string>
     <string name="delete_product">Delete product</string>
+    <string name="choose_image">Choose image</string>
+    <string name="title_product_empty">Title cannot be empty</string>
+    <string name="description_product_empty">Description cannot be empty</string>
+    <string name="price_empty_product">Price cannot be empty</string>
+    <string name="my_products">My products</string>
 </resources>

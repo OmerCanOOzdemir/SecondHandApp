@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
-import android.media.Image
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -13,11 +12,9 @@ import android.view.*
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.example.secondhandapp.data.user.User
 import com.example.secondhandapp.data.user.UserViewModel
 import com.example.secondhandapplication.R
 import com.example.secondhandapplication.activities.LoginActivity
@@ -25,9 +22,9 @@ import com.example.secondhandapplication.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import kotlin.math.log
 import android.content.ContentResolver
-
-
-
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.secondhandapp.entities.RecyclerViewAdapter
 
 
 class ProfileFragment : Fragment() {
@@ -36,6 +33,8 @@ class ProfileFragment : Fragment() {
     private lateinit var userViewModel: UserViewModel
     private lateinit var binding:FragmentProfileBinding
     private lateinit var image_from_galery: Bitmap
+    private lateinit var layoutManager: RecyclerView.LayoutManager
+    private lateinit var adapter: RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
 
     // https://developer.android.com/training/basics/intents/result
     val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -61,10 +60,30 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(layoutInflater)
         val view = binding.root
 
+        //Get firebaseAuth instance
+        auth = FirebaseAuth.getInstance()
+        //Instance of user view model
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
+        //set User informations
+        setInformations(view)
         //Inflate menu
         val toolbar = binding.actionbarProfile
         toolbar.inflateMenu(R.menu.menu_profile)
+
+        //Recyclerview setup
+        layoutManager = LinearLayoutManager(context)
+        val recycler_view =view.findViewById<RecyclerView>(R.id.recyclerView_profile)
+        adapter = RecyclerViewAdapter()
+        recycler_view.adapter = adapter
+        recycler_view.layoutManager = layoutManager
+
+        //Fill own products
+
+        userViewModel.getUserWithProducts(auth.currentUser!!.email!!).observe(viewLifecycleOwner,
+            Observer {
+                (adapter as RecyclerViewAdapter).setData(it[0].product)
+            })
 
 
         //Action for menu
@@ -88,12 +107,8 @@ class ProfileFragment : Fragment() {
                 }
 
             }
-        //Get firebaseAuth instance
-        auth = FirebaseAuth.getInstance()
-        //Instance of user view model
-        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-        //set User informations
-        setInformations(view)
+
+
         //Edit password or mail
         val edit_password_or_mail_btn = view.findViewById<Button>(R.id.change_password_or_mail_button)
         edit_password_or_mail_btn.setOnClickListener {
@@ -113,6 +128,7 @@ class ProfileFragment : Fragment() {
 
 
     private fun setInformations(view:View){
+
         userViewModel.getAuthUser(auth.currentUser!!.email!!).observe(viewLifecycleOwner,
             Observer {
                 val user = it
