@@ -56,7 +56,6 @@ class EditEmailPasswordFragment : Fragment() {
         if(!TextUtils.isEmpty(email.text.toString()) && TextUtils.isEmpty(password.text.toString())&& TextUtils.isEmpty(retype_password.text.toString())){
             updateOnlyEmail(email,old_password,view)
         }else if(!TextUtils.isEmpty(email.text.toString()) && !TextUtils.isEmpty(password.text.toString())&& !TextUtils.isEmpty(retype_password.text.toString())){
-
             if(retype_password.text.toString().equals(password.text.toString())){
                 updateEmailAndPassword(email,old_password,password,view)
             }else{

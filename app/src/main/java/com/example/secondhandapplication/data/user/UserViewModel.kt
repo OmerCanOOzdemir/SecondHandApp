@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.secondhandapp.data.database.SecondHandDatabase
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application):AndroidViewModel(application) {
@@ -38,6 +37,11 @@ class UserViewModel(application: Application):AndroidViewModel(application) {
     fun updateEmailUser(old_email: String,new_email: String){
         viewModelScope.launch {
             repository.updateEmailUser(old_email,new_email)
+        }
+    }
+    fun deleteByEmailUser(email: String){
+        viewModelScope.launch {
+            repository.deleteEmailByUser(email)
         }
     }
 }

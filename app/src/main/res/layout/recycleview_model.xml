@@ -39,7 +39,19 @@
             android:textSize="15sp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp" />
-
+    <Button
+        android:id="@+id/edit_product_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_product"
+        />
+        <Button
+            android:id="@+id/delete_product_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_product"
+            android:backgroundTint="@color/red"
+            />
 
     </LinearLayout>
 

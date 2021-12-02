@@ -23,6 +23,7 @@ interface UserDAO {
     @Query("Update user set email = :new_email where email = :old_email")
     suspend fun updateEmailUser(old_email:String,new_email:String)
 
-
+    @Query("Delete from user where email = :email")
+    suspend fun deleteUserByEmail(email:String)
 
 }

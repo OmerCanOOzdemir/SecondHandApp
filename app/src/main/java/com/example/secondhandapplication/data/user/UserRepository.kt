@@ -35,5 +35,10 @@ class UserRepository(private val userDAO: UserDAO) {
         userDAO.updateEmailUser(old_email,new_email)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteEmailByUser(email: String){
+        userDAO.deleteUserByEmail(email)
+    }
 
 }

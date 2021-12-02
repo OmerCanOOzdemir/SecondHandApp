@@ -58,4 +58,11 @@
     <string name="email_update">Email updated</string>
     <string name="compare_password_error">New password is not matching with retype password</string>
     <string name="update_email_password">Email and password updated</string>
+    <string name="delete_profile">Delete profile</string>
+    <string name="delete_error">Password cannot be empty if you want delete your account</string>
+    <string name="delete_firebase_error">Delete operation denied:</string>
+    <string name="user_deleted">User deleted</string>
+    <string name="user_updated">User Updated</string>
+    <string name="edit_product">Edit product</string>
+    <string name="delete_product">Delete product</string>
 </resources>

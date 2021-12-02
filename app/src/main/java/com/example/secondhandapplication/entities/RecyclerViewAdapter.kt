@@ -4,28 +4,31 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.secondhandapplication.R
 import com.example.secondhandapplication.data.product.Product
+import com.google.firebase.auth.FirebaseAuth
 
 
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
 
-
+    private lateinit var auth:FirebaseAuth
     private var productList = emptyList<Product>()
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var image : ImageView
         var title : TextView
         var price : TextView
-
         init {
-            image = itemView.findViewById<ImageView>(R.id.image_card)
-            title = itemView.findViewById<TextView>(R.id.title_card)
-            price = itemView.findViewById<TextView>(R.id.price_card)
+            auth = FirebaseAuth.getInstance()
+            image = itemView.findViewById(R.id.image_card)
+            title = itemView.findViewById(R.id.title_card)
+            price = itemView.findViewById(R.id.price_card)
+
         }
 
     }
@@ -47,7 +50,9 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
         holder.image.setImageResource(R.drawable.petshop)
         holder.title.text = currentProduct.title
         holder.price.text = currentProduct.price.toString()
+        holder.itemView.findViewById<Button>(R.id.edit_product_button).visibility = View.GONE
 
+        //holder.delete_btn.visibility = View.GONE
         holder.itemView.setOnClickListener {
             Toast.makeText(it.context,"Clicked", Toast.LENGTH_SHORT).show()
         }
