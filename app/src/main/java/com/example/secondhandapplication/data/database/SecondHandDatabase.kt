@@ -7,17 +7,19 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.secondhandapp.data.user.User
 import com.example.secondhandapp.data.user.UserDAO
+import com.example.secondhandapplication.data.category.Category
+import com.example.secondhandapplication.data.category.CategoryDAO
 import com.example.secondhandapplication.data.converter.Converters
 import com.example.secondhandapplication.data.product.Product
 import com.example.secondhandapplication.data.product.ProductDAO
 
-@Database(entities = [User::class, Product::class], version =8, exportSchema = false)
+@Database(entities = [User::class, Product::class,Category::class], version =9, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class SecondHandDatabase: RoomDatabase() {
 
     abstract fun userDao(): UserDAO
     abstract fun productDao():ProductDAO
-
+    abstract fun categoryDao():CategoryDAO
     companion object {
         // Singleton prevents multiple instances of database opening at the
         // same time.
@@ -32,7 +34,7 @@ abstract class SecondHandDatabase: RoomDatabase() {
                     context.applicationContext,
                     SecondHandDatabase::class.java,
                     "second_hand_database"
-                ).fallbackToDestructiveMigration().build()
+                ).createFromAsset("database/category.db").build()
                 INSTANCE = instance
                 // return instance
                 instance

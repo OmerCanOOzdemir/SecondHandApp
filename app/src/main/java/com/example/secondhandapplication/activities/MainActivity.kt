@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
+        //auth.signOut()
         if(user == null){
             val myIntent = Intent(this, LoginActivity::class.java)
             this.startActivity(myIntent)

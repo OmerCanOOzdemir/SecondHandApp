@@ -23,5 +23,7 @@ data class Product (  @PrimaryKey(autoGenerate = true)
                       @ColumnInfo(name="published_date")
                       val date: Date,
                       @ColumnInfo(name = "user_id")
-                      val user_id:String
+                      val user_id:String,
+                      @ColumnInfo(name = "category_id")
+                      val category_id: Int
                       )

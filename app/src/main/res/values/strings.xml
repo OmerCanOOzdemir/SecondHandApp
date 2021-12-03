@@ -70,4 +70,6 @@
     <string name="description_product_empty">Description cannot be empty</string>
     <string name="price_empty_product">Price cannot be empty</string>
     <string name="my_products">My products</string>
+    <string name="choose_category">Choose category</string>
+    <string name="text">Text</string>
 </resources>

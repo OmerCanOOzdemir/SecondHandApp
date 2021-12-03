@@ -24,7 +24,25 @@
     app:queryHint="Search a product"
 
     />
- <androidx.recyclerview.widget.RecyclerView
+  <com.google.android.material.textfield.TextInputLayout
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
+      android:layout_marginStart="10dp"
+      android:layout_marginEnd="10dp"
+      >
+
+   <AutoCompleteTextView
+       android:id="@+id/filter_category"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="@string/choose_category"
+       android:inputType="none"
+       />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <androidx.recyclerview.widget.RecyclerView
      android:id="@+id/recyclerView"
      android:layout_width="match_parent"
      android:layout_height="match_parent"

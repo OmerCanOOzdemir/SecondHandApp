@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
 
-    private lateinit var auth:FirebaseAuth
     private var productList = emptyList<Product>()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -26,7 +25,6 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
         var title : TextView
         var price : TextView
         init {
-            auth = FirebaseAuth.getInstance()
             image = itemView.findViewById(R.id.image_card)
             title = itemView.findViewById(R.id.title_card)
             price = itemView.findViewById(R.id.price_card)
@@ -52,7 +50,6 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
             holder.image.setImageBitmap(currentProduct.image)
             holder.title.text = currentProduct.title
             holder.price.text = currentProduct.price.toString()+"€"
-            holder.itemView.findViewById<Button>(R.id.edit_product_button).visibility = View.GONE
 
 
 
