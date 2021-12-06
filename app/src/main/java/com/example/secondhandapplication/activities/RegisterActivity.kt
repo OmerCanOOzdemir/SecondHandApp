@@ -11,7 +11,6 @@ import android.provider.MediaStore
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
@@ -24,20 +23,25 @@ import com.google.firebase.auth.FirebaseAuth
 class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth;
     private lateinit var userViewModel: UserViewModel
-    private lateinit var image_from_galery:Bitmap
+    private var image_from_galery: Bitmap? = null
+
 
     // https://developer.android.com/training/basics/intents/result
     val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         //getBitmap is deprecated
         if(Build.VERSION.SDK_INT <28){
-            val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver,uri!!)
-            image_from_galery = bitmap
+            val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver,uri)
+            if(bitmap != null){
+                image_from_galery = bitmap
+            }
         }else{
-            val source = ImageDecoder.createSource(this.contentResolver, uri!!)
-            image_from_galery = ImageDecoder.decodeBitmap(source)
+            val source = uri?.let { ImageDecoder.createSource(this.contentResolver, it) }
+            if(source != null){
+                image_from_galery = ImageDecoder.decodeBitmap(source)
+            }
+
 
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +58,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         //upload image
         val upload_image_btn = findViewById<Button>(R.id.upload_profile_image_btn)
+
         upload_image_btn.setOnClickListener {
             uploadImage()
         }
@@ -71,6 +76,8 @@ class RegisterActivity : AppCompatActivity() {
         val phone =  findViewById<EditText>(R.id.register_phone_input)
         val street =  findViewById<EditText>(R.id.register_street_input)
         val street_number =  findViewById<EditText>(R.id.register_number_input)
+        val upload_image_btn = findViewById<Button>(R.id.upload_profile_image_btn)
+
         if(TextUtils.isEmpty(email.text.toString())){
             email.error = getString(R.string.email_error)
             email.requestFocus()
@@ -96,13 +103,17 @@ class RegisterActivity : AppCompatActivity() {
         }else if(TextUtils.isEmpty(street_number.text.toString())){
             street_number.error = getString(R.string.error_street_number)
             street_number.requestFocus()
+        }else if (image_from_galery == null){
+            upload_image_btn.error = getString(R.string.choose_image_error)
+            upload_image_btn.requestFocus()
         }
 
         else{
             auth.createUserWithEmailAndPassword(email.text.toString(),password.text.toString()).addOnCompleteListener {
                 if(it.isSuccessful){
                     val address = Address(street.text.toString(),street_number.text.toString().toInt())
-                    val user = User(email.text.toString(),firstname.text.toString(),lastname.text.toString(),phone.text.toString(),image_from_galery,address)
+                    val user = User(email.text.toString(),firstname.text.toString(),lastname.text.toString(),phone.text.toString(),
+                        image_from_galery!!,address)
                     storeUserInRoom(user)
                     Toast.makeText(this,getString(R.string.success_registration), Toast.LENGTH_LONG).show()
                     val myIntent = Intent(this, LoginActivity::class.java)
@@ -119,5 +130,9 @@ class RegisterActivity : AppCompatActivity() {
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         userViewModel.addUser(user)
     }
+
+
+
+
 
 }

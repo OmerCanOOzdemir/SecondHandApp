@@ -9,8 +9,8 @@ import com.example.secondhandapplication.data.relations.UserWithProducts
 class UserRepository(private val userDAO: UserDAO) {
 
 
-    fun getAuthUser(email:String): LiveData<User> {
-        return userDAO.getAuthUserInfo(email)
+    fun getUserByEmail(email:String): LiveData<User> {
+        return userDAO.getUserByEmail(email)
     }
 
 

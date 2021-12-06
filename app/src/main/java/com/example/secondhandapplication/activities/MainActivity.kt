@@ -2,6 +2,7 @@ package com.example.secondhandapplication.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation.findNavController
 
@@ -24,17 +25,25 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navbar)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
 
+        val intent = intent
+
+        val message_from_login = intent.getStringExtra("success")
+
+        if(message_from_login != null){
+            Toast.makeText(this,message_from_login,Toast.LENGTH_SHORT).show()
+        }
+
 
     }
     override fun onStart() {
         super.onStart()
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
-        //auth.signOut()
         if(user == null){
             val myIntent = Intent(this, LoginActivity::class.java)
             this.startActivity(myIntent)
         }
+
 
     }
 }

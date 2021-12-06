@@ -15,6 +15,7 @@
         android:padding="15dp">
 
         <ImageView
+            android:id="@+id/login_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"

@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.secondhandapp.data.database.SecondHandDatabase
-import com.example.secondhandapplication.data.product.Product
 import com.example.secondhandapplication.data.relations.UserWithProducts
 import kotlinx.coroutines.launch
 
@@ -18,8 +17,8 @@ class UserViewModel(application: Application):AndroidViewModel(application) {
         repository = UserRepository(userdao)
     }
 
-    fun getAuthUser(email:String):LiveData<User>{
-        return repository.getAuthUser(email)
+    fun getUserByEmail(email:String):LiveData<User>{
+        return repository.getUserByEmail(email)
     }
     fun addUser(user:User){
         viewModelScope.launch {

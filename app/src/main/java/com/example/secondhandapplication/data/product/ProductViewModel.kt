@@ -26,5 +26,27 @@ class ProductViewModel(application: Application): AndroidViewModel(application) 
     fun getProductByTitle(title:String): LiveData<List<Product>> {
         return repository.getProductByTitle(title)
     }
-
+    fun getProductById(id:Int):LiveData<Product>{
+        return repository.getProductById(id)
+    }
+    fun deleteProduct(product: Product){
+        viewModelScope.launch {
+            repository.deleteProduct(product)
+        }
+    }
+    fun updateProduct(product:Product){
+        viewModelScope.launch {
+            repository.updateUser(product)
+        }
+    }
+     fun updateProductUserId(old_mail: String, new_email: String){
+        viewModelScope.launch {
+            repository.updateProductUserId(old_mail,new_email)
+        }
+     }
+    fun deleteAllUserProduct(email: String){
+        viewModelScope.launch {
+                  repository.deleteAllUserProduct(email) }
+    }
+    }
 }

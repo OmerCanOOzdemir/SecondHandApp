@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.secondhandapp.data.user.UserViewModel
 import com.example.secondhandapplication.R
+import com.example.secondhandapplication.data.product.ProductViewModel
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import org.w3c.dom.Text
@@ -23,6 +24,7 @@ class EditEmailPasswordFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var userViewModel: UserViewModel
+    private lateinit var productViewModel: ProductViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,6 +71,9 @@ class EditEmailPasswordFragment : Fragment() {
     private fun updateUserRoom(old_email:String,new_email:String){
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         userViewModel.updateEmailUser(old_email,new_email)
+        productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
+        productViewModel.updateProductUserId(old_email,new_email)
+
 
     }
     private fun updateOnlyEmail(email :EditText,old_password:EditText, view: View){

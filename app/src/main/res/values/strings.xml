@@ -1,4 +1,5 @@
 <resources>
+    <string name="mapbox_access_token" translatable="false">pk.eyJ1Ijoib21lcmNhbm96ZGVtaXIiLCJhIjoiY2t3dTBzOHA3MWxlbzJ3dXNobm1sMXloayJ9.4onAb6QF-eXluDCTrJ-OKQ</string>
     <string name="app_name">SecondHandApplication</string>
     <string name="home">Home</string>
     <string name="profile">Profile</string>
@@ -71,5 +72,13 @@
     <string name="price_empty_product">Price cannot be empty</string>
     <string name="my_products">My products</string>
     <string name="choose_category">Choose category</string>
-    <string name="text">Text</string>
+    <string name="go_to_address">Go to address</string>
+    <string name="no_joke_error">Sorry we have no joke for you</string>
+    <string name="welcome_joke">Joke of the day</string>
+    <string name="choose_image_error">Choose an image</string>
+    <string name="no_joke">Sorry we have no joke for you</string>
+    <string name="text">text</string>
+    <string name="error_details_product">An error has been occurred</string>
+    <string name="product_deleted">Product deleted</string>
+    <string name="product_updated">Product updated</string>
 </resources>

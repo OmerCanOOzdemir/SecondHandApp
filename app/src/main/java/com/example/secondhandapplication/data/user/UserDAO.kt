@@ -19,7 +19,7 @@ interface UserDAO {
     suspend fun updateImageUser(image:Bitmap,email: String)
 
     @Query("Select * from user where email=:email")
-    fun getAuthUserInfo(email:String): LiveData<User>
+    fun getUserByEmail(email:String): LiveData<User>
 
     @Query("Update user set email = :new_email where email = :old_email")
     suspend fun updateEmailUser(old_email:String,new_email:String)
@@ -30,5 +30,9 @@ interface UserDAO {
     @Transaction
     @Query("SELECT * FROM User where email = :email")
     fun getUserWithProducts(email:String): LiveData<List<UserWithProducts>>
+
+
+
+
 
 }

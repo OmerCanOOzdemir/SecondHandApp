@@ -13,7 +13,7 @@ import com.example.secondhandapplication.data.converter.Converters
 import com.example.secondhandapplication.data.product.Product
 import com.example.secondhandapplication.data.product.ProductDAO
 
-@Database(entities = [User::class, Product::class,Category::class], version =9, exportSchema = false)
+@Database(entities = [User::class, Product::class,Category::class], version =12, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class SecondHandDatabase: RoomDatabase() {
 

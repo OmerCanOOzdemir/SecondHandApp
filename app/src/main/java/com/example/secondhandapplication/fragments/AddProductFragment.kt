@@ -25,7 +25,7 @@ class AddProductFragment : Fragment() {
 
     private lateinit var productViewModel: ProductViewModel
     private lateinit var categoryViewModel: CategoryViewModel
-    private lateinit var image: Bitmap
+    private var image: Bitmap? = null
     private lateinit var auth:FirebaseAuth
     private lateinit var autoCompleteTextView:AutoCompleteTextView
 
@@ -34,11 +34,16 @@ class AddProductFragment : Fragment() {
         val resolver = requireActivity().contentResolver
         //getBitmap is deprecated
         if(Build.VERSION.SDK_INT <28){
-            val bitmap = MediaStore.Images.Media.getBitmap(resolver,uri!!)
-            image = bitmap
+            val bitmap = MediaStore.Images.Media.getBitmap(resolver,uri)
+            if(bitmap != null){
+                image = bitmap
+            }
+
         }else{
-            val source = ImageDecoder.createSource(resolver, uri!!)
-            image = ImageDecoder.decodeBitmap(source)
+            val source = uri?.let { ImageDecoder.createSource(resolver, it) }
+            if(source != null){
+                image = ImageDecoder.decodeBitmap(source)
+            }
         }
     }
 
@@ -82,8 +87,7 @@ class AddProductFragment : Fragment() {
         val title = view.findViewById<EditText>(R.id.title_product_input)
         val description = view.findViewById<EditText>(R.id.description_product_input)
         val price = view.findViewById<EditText>(R.id.price_product_input)
-
-        println(autoCompleteTextView.text.toString())
+        val upload_image_btn = view.findViewById<Button>(R.id.upload_product_image_btn)
         if(TextUtils.isEmpty(title.text)){
             title.error = getString(R.string.title_product_empty)
             title.requestFocus()
@@ -96,11 +100,17 @@ class AddProductFragment : Fragment() {
         }else if(autoCompleteTextView.text.toString() == getString(R.string.choose_category)){
             autoCompleteTextView.error = getString(R.string.choose_category)
             autoCompleteTextView.requestFocus()
-        }else{
-            val category_id = categoryViewModel.getIdOfCategory(autoCompleteTextView.text.toString()).observe(viewLifecycleOwner,
+        }else if (image == null){
+            upload_image_btn.error = getString(R.string.choose_image_error)
+            upload_image_btn.requestFocus()
+        }
+
+        else{
+                categoryViewModel.getIdOfCategory(autoCompleteTextView.text.toString()).observe(viewLifecycleOwner,
                 androidx.lifecycle.Observer {
                     val date = Date()
-                    val product = Product(0,title.text.toString(),description.text.toString(),price.text.toString().toDouble(),image,date,auth.currentUser!!.email!!,
+                    val product = Product(0,title.text.toString(),description.text.toString(),price.text.toString().toDouble(),
+                        image!!,date,auth.currentUser!!.email!!,
                         it
                     )
                     productViewModel.addProduct(product)

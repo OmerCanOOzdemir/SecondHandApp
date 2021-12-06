@@ -10,7 +10,7 @@ import com.example.secondhandapplication.data.address.Address
 
 
 @Entity(tableName = "user")
-data class User (
+data class User(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "email")
     val email:String,
@@ -23,7 +23,7 @@ data class User (
     val phone:String,
     @ColumnInfo(name = "profile_image")
     @Nullable
-    var image:Bitmap,
+    var image: Bitmap?,
     @Embedded
     var address: Address
 

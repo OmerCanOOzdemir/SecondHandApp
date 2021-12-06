@@ -17,8 +17,10 @@ import androidx.navigation.Navigation
 import com.example.secondhandapp.data.user.User
 import com.example.secondhandapp.data.user.UserViewModel
 import com.example.secondhandapplication.R
+import com.example.secondhandapplication.activities.EditProductActivity
 import com.example.secondhandapplication.activities.LoginActivity
 import com.example.secondhandapplication.data.address.Address
+import com.example.secondhandapplication.data.product.ProductViewModel
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -29,7 +31,8 @@ class EditProfileFragment : Fragment() {
     private lateinit var auth:FirebaseAuth
     private lateinit var userViewModel: UserViewModel
     private lateinit var auth_user : FirebaseUser
-    private lateinit var image:Bitmap
+    private  var image:Bitmap? = null
+    private lateinit var productViewModel: ProductViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +40,8 @@ class EditProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_edit_profile, container, false)
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
+
         //Get auth user
         auth = FirebaseAuth.getInstance()
         auth_user = auth.currentUser!!
@@ -90,10 +95,11 @@ class EditProfileFragment : Fragment() {
         }
     private fun deleteUserRoom(email:String){
         userViewModel.deleteByEmailUser(email)
+        productViewModel.deleteAllUserProduct(email)
     }
     private fun setUserInformations(view: View){
         //Get room user
-        userViewModel.getAuthUser(auth.currentUser!!.email!!).observe(viewLifecycleOwner,
+        userViewModel.getUserByEmail(auth.currentUser!!.email!!).observe(viewLifecycleOwner,
             Observer{
                 val user = it
                 //Get all fields
@@ -124,7 +130,8 @@ class EditProfileFragment : Fragment() {
         val address = Address(street_name.text.toString(),street_number.text.toString().toInt())
 
         // Update user
-        val user_with_new_informations= User(auth_user.email!!,firstname.text.toString(),lastname.text.toString(),phone.text.toString(),image,address)
+        val user_with_new_informations= User(auth_user.email!!,firstname.text.toString(),lastname.text.toString(),phone.text.toString(),
+            image!!,address)
         userViewModel.updateUser(user_with_new_informations)
 
         //Go to profile fragment

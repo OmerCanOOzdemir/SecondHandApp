@@ -11,6 +11,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 
     defaultConfig {
         applicationId "com.example.secondhandapplication"
@@ -18,7 +21,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -39,6 +42,9 @@ android {
 
 dependencies {
 
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.0.1'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.5.0'
+
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "androidx.activity:activity-ktx:$rootProject.activityVersion"
@@ -50,6 +56,7 @@ dependencies {
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.test.ext:junit-ktx:1.1.3'
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
@@ -67,17 +74,23 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
 
-    // Testing
-    testImplementation "junit:junit:$rootProject.junitVersion"
-    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
-    androidTestImplementation ("androidx.test.espresso:espresso-core:$rootProject.espressoVersion", {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
-
+    //Jetpack navigation
     def nav_version = "2.3.0-alpha06"
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
+
+
+    //GSON
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //Multidex
+    implementation 'com.android.support:multidex:1.0.3'
+    //Coil
+    implementation 'io.coil-kt:coil:1.4.0'
+
+
+
 
 
 }

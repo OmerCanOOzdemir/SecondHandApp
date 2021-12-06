@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.secondhandapp.entities.RecyclerViewAdapter
 import com.example.secondhandapplication.R
 import com.example.secondhandapplication.data.category.CategoryViewModel
-import com.example.secondhandapplication.data.product.Product
 import com.example.secondhandapplication.data.product.ProductViewModel
 import com.example.secondhandapplication.databinding.FragmentHomeBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton

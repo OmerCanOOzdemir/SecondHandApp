@@ -20,8 +20,6 @@ import com.example.secondhandapplication.R
 import com.example.secondhandapplication.activities.LoginActivity
 import com.example.secondhandapplication.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
-import kotlin.math.log
-import android.content.ContentResolver
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.secondhandapp.entities.RecyclerViewAdapter
@@ -41,13 +39,19 @@ class ProfileFragment : Fragment() {
         val resolver = requireActivity().contentResolver
         //getBitmap is deprecated
         if(Build.VERSION.SDK_INT <28){
-            val bitmap = MediaStore.Images.Media.getBitmap(resolver,uri!!)
-            image_from_galery = bitmap
-            updateImageProfile(image_from_galery)
+            val bitmap = MediaStore.Images.Media.getBitmap(resolver,uri)
+            if(bitmap!=null){
+                image_from_galery = bitmap
+                updateImageProfile(image_from_galery)
+            }
+
         }else{
-            val source = ImageDecoder.createSource(resolver, uri!!)
-            image_from_galery = ImageDecoder.decodeBitmap(source)
-            updateImageProfile(image_from_galery)
+            val source = uri?.let { ImageDecoder.createSource(resolver, it) }
+            if(source != null){
+                image_from_galery = ImageDecoder.decodeBitmap(source)
+                updateImageProfile(image_from_galery)
+            }
+
         }
     }
 
@@ -101,6 +105,7 @@ class ProfileFragment : Fragment() {
                     true
                     }
                 R.id.edit_profile -> {
+
                     Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_editProfileFragment)
                     true
                 }else -> false
@@ -128,8 +133,8 @@ class ProfileFragment : Fragment() {
 
 
     private fun setInformations(view:View){
-
-        userViewModel.getAuthUser(auth.currentUser!!.email!!).observe(viewLifecycleOwner,
+        println(auth.currentUser!!.email)
+        userViewModel.getUserByEmail(auth.currentUser!!.email!!).observe(viewLifecycleOwner,
             Observer {
                 val user = it
                 val name = view.findViewById<TextView>(R.id.name_profile)
