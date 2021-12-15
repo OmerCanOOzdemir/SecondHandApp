@@ -33,6 +33,9 @@ interface UserDAO {
 
 
 
+    @Query("Select * from user where email=:email")
+    fun getUserByEmailTesting(email:String): User
+
 
 
 }

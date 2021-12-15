@@ -108,23 +108,18 @@ class ProfileFragment : Fragment() {
 
                     Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_editProfileFragment)
                     true
-                }else -> false
                 }
-
+                R.id.edit_email_or_password ->{
+                    Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_editEmailPasswordFragment)
+                    true
+                }
+                R.id.change_image ->{
+                    uploadImage()
+                    true
+                }
+                else -> false
+                }
             }
-
-
-        //Edit password or mail
-        val edit_password_or_mail_btn = view.findViewById<Button>(R.id.change_password_or_mail_button)
-        edit_password_or_mail_btn.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_editEmailPasswordFragment)
-        }
-
-        //Edit Image
-        val edit_image_btn = view.findViewById<Button>(R.id.change_image_button)
-        edit_image_btn.setOnClickListener {
-            uploadImage()
-        }
         //inflate view
         return view
     }

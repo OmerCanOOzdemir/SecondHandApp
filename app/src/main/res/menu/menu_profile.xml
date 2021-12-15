@@ -4,7 +4,14 @@
     <item android:id="@+id/edit_profile"
         android:title="@string/edit_profile"
         app:showAsAction="never"/>
+    <item android:id="@+id/edit_email_or_password"
+        android:title="@string/change_password_or_mail"
+        app:showAsAction="never"/>
+    <item android:id="@+id/change_image"
+        android:title="@string/change_image"
+        app:showAsAction="never"/>
     <item android:id="@+id/logout"
         android:title="@string/logout_menu"/>
+
 
 </menu>

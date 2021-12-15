@@ -48,4 +48,8 @@ class UserViewModel(application: Application):AndroidViewModel(application) {
     fun getUserWithProducts(email: String): LiveData<List<UserWithProducts>> {
         return repository.getUserWithProducts(email)
     }
+
+    fun getUserByEmailTesting(email:String): User{
+        return repository.getUserByEmailTesting(email)
+    }
 }

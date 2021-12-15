@@ -14,15 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SecondHandApplication">
-        <activity
-            android:name=".activities.MapViewActivity"
-            android:exported="true" />
+
         <activity
             android:name=".activities.EditProductActivity"
             android:exported="true" />
         <activity
             android:name=".activities.ProductDetailsActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".activities.MainActivity"
+            />
         <activity
             android:name=".activities.RegisterActivity"
             android:exported="true" />

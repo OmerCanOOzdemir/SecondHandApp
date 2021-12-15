@@ -81,4 +81,8 @@
     <string name="error_details_product">An error has been occurred</string>
     <string name="product_deleted">Product deleted</string>
     <string name="product_updated">Product updated</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="register_city_empty">City can not be empty</string>
+    <string name="register_country_empty">Country cannot be empty</string>
 </resources>

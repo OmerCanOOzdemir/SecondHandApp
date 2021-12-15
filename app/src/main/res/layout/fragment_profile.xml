@@ -14,8 +14,8 @@
     android:orientation="vertical"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
+
     >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/actionbar_profile"
@@ -46,7 +46,7 @@
           android:id="@+id/image_profile"
           android:layout_width="match_parent"
           android:layout_height="200dp"
-          tool:src="@drawable/petshop"
+          tool:src="@drawable/ic_baseline_person_24"
           />
       <TextView
           android:id="@+id/name_profile"
@@ -86,16 +86,7 @@
           android:textSize="15sp"
           android:layout_marginStart="10dp"
           android:layout_marginLeft="10dp" />
-      <Button
-          android:id="@+id/change_image_button"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-        android:text="@string/change_image"/>
-      <Button
-        android:id="@+id/change_password_or_mail_button"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-        android:text="@string/change_password_or_mail"/>
+
       <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

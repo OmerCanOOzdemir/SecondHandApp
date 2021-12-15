@@ -22,7 +22,7 @@ class CategoryViewModel(application: Application): AndroidViewModel(application)
 
 
 
-    fun addProduct(category: Category){
+    fun addCategory(category: Category){
         viewModelScope.launch {
             repository.addCategory(category)
         }
@@ -32,6 +32,14 @@ class CategoryViewModel(application: Application): AndroidViewModel(application)
     }
     fun getIdOfCategory(name: String):LiveData<Int>{
         return repository.getIdOfCategory(name)
+    }
+    fun getCategoryByName(name : String): Category {
+        return repository.getCategoryByName(name);
+    }
+    suspend fun deleteCategory(id: Int){
+        viewModelScope.launch {
+            repository.deleteCategory(id);
+        }
     }
 
 }

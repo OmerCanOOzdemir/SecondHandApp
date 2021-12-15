@@ -109,13 +109,17 @@ class EditProfileFragment : Fragment() {
                 val phone = view.findViewById<EditText>(R.id.edit_phone_input)
                 val street_name = view.findViewById<EditText>(R.id.edit_street_input)
                 val street_number = view.findViewById<EditText>(R.id.edit_number_input)
-
+                val city = view.findViewById<EditText>(R.id.edit_city_input)
+                val country = view.findViewById<EditText>(R.id.edit_country_input)
                 //Set fields value
                 firstname.setText(user.firstname)
                 lastname.setText(user.lastname)
                 phone.setText(user.phone)
                 street_name.setText(user.address.streetname)
                 street_number.setText(user.address.streetnumber.toString())
+                city.setText(user.address.city)
+                country.setText(user.address.country)
+
             })
 
 
@@ -127,7 +131,9 @@ class EditProfileFragment : Fragment() {
         val phone = view.findViewById<EditText>(R.id.edit_phone_input)
         val street_name = view.findViewById<EditText>(R.id.edit_street_input)
         val street_number = view.findViewById<EditText>(R.id.edit_number_input)
-        val address = Address(street_name.text.toString(),street_number.text.toString().toInt())
+        val city = view.findViewById<EditText>(R.id.edit_city_input)
+        val country = view.findViewById<EditText>(R.id.edit_country_input)
+        val address = Address(street_name.text.toString(),street_number.text.toString().toInt(),city.text.toString(),country.text.toString())
 
         // Update user
         val user_with_new_informations= User(auth_user.email!!,firstname.text.toString(),lastname.text.toString(),phone.text.toString(),

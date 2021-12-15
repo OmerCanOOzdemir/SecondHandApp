@@ -25,7 +25,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:src="@drawable/ic_baseline_android_24" />
+                android:src="@drawable/ic_baseline_person_24" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -156,7 +156,6 @@
                     android:inputType="text"
                     />
             </com.google.android.material.textfield.TextInputLayout>
-
             <Button
                 android:id="@+id/upload_profile_image_btn"
                 android:layout_width="match_parent"
@@ -164,6 +163,7 @@
                 android:text="@string/choose_profile_image"
                 android:layout_marginTop="15dp"
                 android:padding="12dp"
+                android:backgroundTint="@color/green"
 
                 />
             <Button
@@ -173,6 +173,7 @@
                 android:layout_marginTop="15dp"
                 android:padding="12dp"
                 android:text="@string/register"
+                android:backgroundTint="@color/green"
                 />
 
 

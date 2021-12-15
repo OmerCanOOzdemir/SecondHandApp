@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Hide action bar
+        getSupportActionBar()?.hide()
         val navController = findNavController(this, R.id.fragment)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navbar)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         auth = FirebaseAuth.getInstance()
+
         val user = auth.currentUser
         if(user == null){
             val myIntent = Intent(this, LoginActivity::class.java)

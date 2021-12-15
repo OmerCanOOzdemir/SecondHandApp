@@ -25,8 +25,6 @@ class LoginActivity : AppCompatActivity() {
 
         //Get Joke from api
         getJoke()
-        //Get Random image from picsum using coil
-        findViewById<ImageView>(R.id.login_image).load("https://picsum.photos/200/300")
         auth = FirebaseAuth.getInstance()
         val register_btn = findViewById<TextView>(R.id.register_button)
         val login_btn = findViewById<Button>(R.id.login_button)

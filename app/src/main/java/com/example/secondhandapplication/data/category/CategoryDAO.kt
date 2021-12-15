@@ -23,4 +23,11 @@ interface CategoryDAO {
 
     @Query("Select id from category where name = :name")
     fun getIdOfCategory(name: String):LiveData<Int>
+
+    @Query("Select * from category where name = :name")
+    fun getCategoryByName(name : String):Category
+
+    @Query("Delete from category  Where id = :id")
+    suspend fun deleteCategory(id: Int)
+
 }

@@ -2,6 +2,7 @@ package com.example.secondhandapplication.data.category
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import androidx.room.Query
 import com.example.secondhandapplication.data.product.Product
 import com.example.secondhandapplication.data.product.ProductDAO
 import com.example.secondhandapplication.data.relations.CategoryWithProducts
@@ -26,6 +27,14 @@ class CategoryRepository(private val categoryDAO: CategoryDAO) {
     }
     fun getIdOfCategory(name: String):LiveData<Int>{
         return categoryDAO.getIdOfCategory(name)
+    }
+    fun getCategoryByName(name : String): Category {
+        return categoryDAO.getCategoryByName(name);
+    }
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteCategory(id: Int){
+        categoryDAO.deleteCategory(id);
     }
 
 

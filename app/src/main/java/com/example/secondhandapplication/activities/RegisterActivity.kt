@@ -77,6 +77,9 @@ class RegisterActivity : AppCompatActivity() {
         val street =  findViewById<EditText>(R.id.register_street_input)
         val street_number =  findViewById<EditText>(R.id.register_number_input)
         val upload_image_btn = findViewById<Button>(R.id.upload_profile_image_btn)
+        val city = findViewById<EditText>(R.id.register_city_input)
+        val country = findViewById<EditText>(R.id.register_country_input)
+
 
         if(TextUtils.isEmpty(email.text.toString())){
             email.error = getString(R.string.email_error)
@@ -103,6 +106,12 @@ class RegisterActivity : AppCompatActivity() {
         }else if(TextUtils.isEmpty(street_number.text.toString())){
             street_number.error = getString(R.string.error_street_number)
             street_number.requestFocus()
+        }else if(TextUtils.isEmpty(city.text.toString())){
+            city.error = getString(R.string.register_city_empty)
+            city.requestFocus()
+        }else if(TextUtils.isEmpty(country.text.toString())){
+            country.error = getString(R.string.register_country_empty)
+            country.requestFocus()
         }else if (image_from_galery == null){
             upload_image_btn.error = getString(R.string.choose_image_error)
             upload_image_btn.requestFocus()
@@ -111,7 +120,7 @@ class RegisterActivity : AppCompatActivity() {
         else{
             auth.createUserWithEmailAndPassword(email.text.toString(),password.text.toString()).addOnCompleteListener {
                 if(it.isSuccessful){
-                    val address = Address(street.text.toString(),street_number.text.toString().toInt())
+                    val address = Address(street.text.toString(),street_number.text.toString().toInt(),city.text.toString(),country.text.toString())
                     val user = User(email.text.toString(),firstname.text.toString(),lastname.text.toString(),phone.text.toString(),
                         image_from_galery!!,address)
                     storeUserInRoom(user)

@@ -46,4 +46,8 @@ class UserRepository(private val userDAO: UserDAO) {
     fun getUserWithProducts(email: String): LiveData<List<UserWithProducts>> {
         return userDAO.getUserWithProducts(email)
     }
+
+    fun getUserByEmailTesting(email:String): User{
+        return userDAO.getUserByEmailTesting(email)
+    }
 }

@@ -49,4 +49,3 @@ class ProductViewModel(application: Application): AndroidViewModel(application) 
                   repository.deleteAllUserProduct(email) }
     }
     }
-}

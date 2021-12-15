@@ -19,7 +19,7 @@
             android:id="@+id/details_image_card"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            tool:src="@drawable/petshop"
+            tool:src="@drawable/ic_baseline_person_24"
             />
         <TextView
             android:id="@+id/details_title_card"
@@ -83,18 +83,6 @@
             android:layout_height="wrap_content"
             android:text="@string/go_to_address"/>
 
-        <Button
-            android:id="@+id/edit_product_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/edit_product"
-            />
-        <Button
-            android:id="@+id/delete_product_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/delete_product"
-            android:backgroundTint="@color/red"/>
 
     </LinearLayout>
 
