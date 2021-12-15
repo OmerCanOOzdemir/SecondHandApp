@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -21,6 +22,7 @@ import com.example.secondhandapplication.activities.EditProductActivity
 import com.example.secondhandapplication.activities.LoginActivity
 import com.example.secondhandapplication.data.address.Address
 import com.example.secondhandapplication.data.product.ProductViewModel
+import com.example.secondhandapplication.shared.SharedViewModel
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -33,6 +35,9 @@ class EditProfileFragment : Fragment() {
     private lateinit var auth_user : FirebaseUser
     private  var image:Bitmap? = null
     private lateinit var productViewModel: ProductViewModel
+    private val sharedViewModel : SharedViewModel by activityViewModels()
+    private var email = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +47,10 @@ class EditProfileFragment : Fragment() {
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
 
+        //Get email from previous fragment
+        sharedViewModel.userEmail.observe(viewLifecycleOwner, Observer {
+            email = it
+        })
         //Get auth user
         auth = FirebaseAuth.getInstance()
         auth_user = auth.currentUser!!
@@ -73,7 +82,6 @@ class EditProfileFragment : Fragment() {
             password.error = getString(R.string.delete_error)
         }else{
             //Re authenticate user
-            val email = auth_user.email
             val credential = EmailAuthProvider.getCredential(email!!, password.text.toString())
 
             auth_user.reauthenticate(credential).addOnCompleteListener {
@@ -136,7 +144,7 @@ class EditProfileFragment : Fragment() {
         val address = Address(street_name.text.toString(),street_number.text.toString().toInt(),city.text.toString(),country.text.toString())
 
         // Update user
-        val user_with_new_informations= User(auth_user.email!!,firstname.text.toString(),lastname.text.toString(),phone.text.toString(),
+        val user_with_new_informations= User(email,firstname.text.toString(),lastname.text.toString(),phone.text.toString(),
             image!!,address)
         userViewModel.updateUser(user_with_new_informations)
 

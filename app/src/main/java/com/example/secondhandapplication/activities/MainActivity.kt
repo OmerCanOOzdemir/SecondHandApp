@@ -23,12 +23,11 @@ class MainActivity : AppCompatActivity() {
 
         //Hide action bar
         getSupportActionBar()?.hide()
+
         val navController = findNavController(this, R.id.fragment)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navbar)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
-
         val intent = intent
-
         val message_from_login = intent.getStringExtra("success")
 
         if(message_from_login != null){

@@ -1,5 +1,7 @@
 package com.example.secondhandapplication.activities
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.opengl.Visibility
@@ -27,6 +29,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     private lateinit var auth :FirebaseAuth
     private var own_product = false
     private lateinit var product: Product
+    private var productId :Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +37,10 @@ class ProductDetailsActivity : AppCompatActivity() {
         //Back button
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         auth = FirebaseAuth.getInstance()
-        val productId = intent.getIntExtra("id",0)
+        productId = intent.getIntExtra("id",0)
 
         if(productId !=0 ){
-            //Edit product
             setProductInfo(productId)
-
         }else{
             val intent = Intent(this,MainActivity::class.java)
             Toast.makeText(this,getString(R.string.error_details_product),Toast.LENGTH_SHORT).show()
@@ -61,8 +62,6 @@ class ProductDetailsActivity : AppCompatActivity() {
         val goMap = findViewById<Button>(R.id.address_button)
 
 
-        goMap.setOnClickListener {
-        }
 
         productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
@@ -70,60 +69,59 @@ class ProductDetailsActivity : AppCompatActivity() {
         productViewModel.getProductById(id).observe(this, Observer {
 
             product = it
-            if(product.user_id == auth.currentUser!!.email){
-                own_product = true
-            }
-            println(own_product)
-            title.text = product.title
-            description.text = product.description
-            date.text = product.date.toString()
-            image.setImageBitmap(product.image)
-            price.text = product.price.toString() +"€"
+                if(product.user_id == auth.currentUser!!.email){
+                    own_product = true
+                    this.invalidateOptionsMenu()
+                }
+                title.text = product.title
+                description.text = product.description
+                date.text = product.date.toString()
+                image.setImageBitmap(product.image)
+                price.text = product.price.toString() +"€"
 
-            goMap.setOnClickListener {
-                val gmmIntentUri =
-                    Uri.parse("geo:0,0?q="+address.text)
-                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                mapIntent.setPackage("com.google.android.apps.maps")
-                startActivity(mapIntent)
+                goMap.setOnClickListener {
+                    val gmmIntentUri =
+                        Uri.parse("geo:0,0?q="+address.text)
+                    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                    mapIntent.setPackage("com.google.android.apps.maps")
+                    startActivity(mapIntent)
 
-            }
+                }
 
-            userViewModel.getUserByEmail(it.user_id).observe(this, Observer {
-                val user = it
-                phone.text = user.phone
-                address.text = user.address.streetname +" "+ user.address.streetnumber.toString() + ","+user.address.country + ", "+user.address.city
+                userViewModel.getUserByEmail(it.user_id).observe(this, Observer {
+                    val user = it
+                    phone.text = user.phone
+                    address.text = user.address.streetname +" "+ user.address.streetnumber.toString() + ","+user.address.country + ", "+user.address.city
 
-            })
+                })
+
 
         })
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        println(own_product)
-        return if(own_product){
+        if(own_product){
             menuInflater.inflate(R.menu.product_details_menu,menu)
-            true
-        } else false
+        }
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.edit_product_menu_btn ->{
                 val intent = Intent(this,EditProductActivity::class.java)
-                intent.putExtra("id",intent.getIntExtra("id",0))
+                intent.putExtra("id",productId)
                 startActivity(intent)
-                true
+                return true
             }
             R.id.delete_product_menu_btn ->{
-                productViewModel.deleteProduct(product)
-                Toast.makeText(this,getString(R.string.product_deleted),Toast.LENGTH_SHORT).show()
-
                 val intent = Intent(this,MainActivity::class.java)
                 startActivity(intent)
                 finish()
-                true
-            }else -> false
+                productViewModel.deleteProduct(product)
+                Toast.makeText(this,getString(R.string.product_deleted),Toast.LENGTH_SHORT).show()
+                return true
+            }
         }
-        return super.onOptionsItemSelected(item)
+        return true
     }
 }

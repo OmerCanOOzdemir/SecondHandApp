@@ -12,6 +12,7 @@ import android.view.*
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -23,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.secondhandapp.entities.RecyclerViewAdapter
+import com.example.secondhandapplication.shared.SharedViewModel
 
 
 class ProfileFragment : Fragment() {
@@ -33,6 +35,8 @@ class ProfileFragment : Fragment() {
     private lateinit var image_from_galery: Bitmap
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
+    private val sharedViewModel : SharedViewModel by activityViewModels()
+
 
     // https://developer.android.com/training/basics/intents/result
     val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -105,7 +109,7 @@ class ProfileFragment : Fragment() {
                     true
                     }
                 R.id.edit_profile -> {
-
+                    sharedViewModel.saveUserEmail(auth.currentUser!!.email!!.toString())
                     Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_editProfileFragment)
                     true
                 }
@@ -128,7 +132,6 @@ class ProfileFragment : Fragment() {
 
 
     private fun setInformations(view:View){
-        println(auth.currentUser!!.email)
         userViewModel.getUserByEmail(auth.currentUser!!.email!!).observe(viewLifecycleOwner,
             Observer {
                 val user = it
