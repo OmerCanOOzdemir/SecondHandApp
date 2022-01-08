@@ -68,4 +68,11 @@
     <string name="choose_image_error">Kies een afbeelding</string>
     <string name="no_joke">We hebben geen grapje voor u</string>
     <string name="text">tekst</string>
+    <string name="product_deleted">Product verwijderd</string>
+    <string name="product_updated">Product gewijzigt</string>
+    <string name="city">Stad</string>
+    <string name="country">Land</string>
+    <string name="register_city_empty">Stad mag niet leeg zijn</string>
+    <string name="register_country_empty">Land mag niet leeg zijn</string>
+    <string name="error_details_product">Er is een fout opgetreden</string>
 </resources>
