@@ -42,9 +42,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         if(productId !=0 ){
             setProductInfo(productId)
         }else{
-            val intent = Intent(this,MainActivity::class.java)
-            Toast.makeText(this,getString(R.string.error_details_product),Toast.LENGTH_SHORT).show()
-            startActivity(intent)
+
             finish()
         }
 
@@ -67,8 +65,10 @@ class ProductDetailsActivity : AppCompatActivity() {
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
         productViewModel.getProductById(id).observe(this, Observer {
-
-            product = it
+            if(it == null){
+                finish()
+            }else{
+                product = it
                 if(product.user_id == auth.currentUser!!.email){
                     own_product = true
                     this.invalidateOptionsMenu()
@@ -94,6 +94,8 @@ class ProductDetailsActivity : AppCompatActivity() {
                     address.text = user.address.streetname +" "+ user.address.streetnumber.toString() + ","+user.address.country + ", "+user.address.city
 
                 })
+            }
+
 
 
         })
@@ -114,14 +116,13 @@ class ProductDetailsActivity : AppCompatActivity() {
                 return true
             }
             R.id.delete_product_menu_btn ->{
-                val intent = Intent(this,MainActivity::class.java)
-                startActivity(intent)
-                finish()
                 productViewModel.deleteProduct(product)
                 Toast.makeText(this,getString(R.string.product_deleted),Toast.LENGTH_SHORT).show()
+                finish()
                 return true
             }
         }
         return true
     }
+
 }

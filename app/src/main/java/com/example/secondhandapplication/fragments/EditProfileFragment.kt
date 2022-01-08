@@ -50,6 +50,7 @@ class EditProfileFragment : Fragment() {
         //Get email from previous fragment
         sharedViewModel.userEmail.observe(viewLifecycleOwner, Observer {
             email = it
+
         })
         //Get auth user
         auth = FirebaseAuth.getInstance()

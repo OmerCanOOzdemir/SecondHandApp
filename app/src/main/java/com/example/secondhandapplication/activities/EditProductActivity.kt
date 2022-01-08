@@ -53,6 +53,7 @@ class EditProductActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_product)
         //Back button
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         auth = FirebaseAuth.getInstance()
         val id = intent.getIntExtra("id",0)
 
@@ -68,6 +69,8 @@ class EditProductActivity : AppCompatActivity() {
 
 
     }
+
+
 
     private fun setProductInformations(id:Int) {
         productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)

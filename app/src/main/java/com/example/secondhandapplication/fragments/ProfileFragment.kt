@@ -132,6 +132,7 @@ class ProfileFragment : Fragment() {
 
 
     private fun setInformations(view:View){
+        println(auth.currentUser!!.email)
         userViewModel.getUserByEmail(auth.currentUser!!.email!!).observe(viewLifecycleOwner,
             Observer {
                 val user = it
